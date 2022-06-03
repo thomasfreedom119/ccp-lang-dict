@@ -1,8 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
 import './App.css';
+import { useSearchLang } from './hooks/useSearchLang';
+import logo from './logo.svg';
 
 function App() {
+  const { loading, searchResult } = useSearchLang('某些战略')
+
+  useEffect(() => {
+    if (searchResult) {
+      console.log(searchResult)
+    }
+  }, [searchResult])
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +27,7 @@ function App() {
         >
           Learn React
         </a>
+
       </header>
     </div>
   );
