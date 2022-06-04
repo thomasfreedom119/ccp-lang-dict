@@ -10,7 +10,6 @@ export const useSearchLang = (inputTerm?: string) => {
     dipResults: LangItemType[],
     milResults: LangItemType[],
   }>()
-  console.log('shit')
 
   useEffect(() => {
     setLoading(true)
@@ -18,23 +17,19 @@ export const useSearchLang = (inputTerm?: string) => {
       axios.get('/cedict_ts.u8').then((res: any) => {
         const tokenize = tokenizer.load(res.data)
         const tokenizedWords = tokenize(inputTerm)
-        console.log(tokenizedWords)
+
         const tks = tokenizedWords.map((token: any) => {
           return token.text
-        }).filter((t: string) => t.length > 1).join('|')
-        const re = new RegExp(tks, 'g')
-        console.log(re)
+        }).filter((t: string) => t.length > 1)
+        const re = new RegExp([inputTerm, ...tks].join('|'), 'g')
+
         const dipFiltered = dipLangItems.filter((dItem: LangItemType) => {
-          console.log(dItem)
           return dItem.officialLang.search(re) !== -1 || dItem.normalLang.search(re) !== -1
         })
-        console.log('dipFilterd', dipFiltered)
 
         const milFiltered = milLangItems.filter((mItem: LangItemType) => {
-          console.log(mItem)
           return mItem.officialLang.search(re) !== -1 || mItem.normalLang.search(re) !== -1
         })
-        console.log('milFiltered', milFiltered)
 
         setSearchResult({
           dipResults: dipFiltered,

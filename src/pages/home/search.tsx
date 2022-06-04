@@ -1,29 +1,11 @@
 import { CircularProgress, Grid, Input, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSearchLang } from "../../hooks/useSearchLang";
 
 export const Search = () => {
   const [searchText, setSearchText] = useState<string>()
   const [inputText, setInputText] = useState<string>('')
   const { loading, searchResult } = useSearchLang(searchText)
-  // let timer: any = null
-
-  useEffect(() => {
-    if (searchResult) {
-      console.log(searchResult)
-    }
-  }, [searchResult])
-
-  // useEffect(() => {
-  //   if (timer) {
-  //     clearTimeout(timer)
-  //   } else {
-  //     timer = setTimeout(() => {
-  //       setSearchText(inputText)
-  //     }, 10000)
-  //   }
-
-  // }, [inputText])
 
   const onUserInput = (e: any) => {
     setInputText(e.target.value)
