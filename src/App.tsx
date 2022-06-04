@@ -1,35 +1,18 @@
-import React, { useEffect } from 'react';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
-import { useSearchLang } from './hooks/useSearchLang';
-import logo from './logo.svg';
+import { AppRoutes } from './routes/app';
+import { theme } from './styles/customization';
 
 function App() {
-  const { loading, searchResult } = useSearchLang('某些战略')
-
-  useEffect(() => {
-    if (searchResult) {
-      console.log(searchResult)
-    }
-  }, [searchResult])
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-      </header>
-    </div>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <CssBaseline />
+        <AppRoutes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
