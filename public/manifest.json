@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "CCP Dictionary",
+  "name": "CCP's diplomatic and military terms dictionary",
   "icons": [
     {
       "src": "favicon.ico",

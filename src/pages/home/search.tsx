@@ -1,4 +1,4 @@
-import { Box, Button, CircularProgress, Grid, Input, Typography } from "@mui/material";
+import { Avatar, Box, Button, CircularProgress, Grid, Input, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { useSearchLang } from "../../hooks/useSearchLang";
 
@@ -19,7 +19,13 @@ export const Search = () => {
 
   return (
     <>
-      <Box paddingTop={'20px'} width={'100%'}>
+      <Box paddingTop={'20px'} width={'100%'} display='flex'>
+        <Avatar
+          alt="Dict"
+          src={`${process.env.PUBLIC_URL}/logo.jpg`}
+          sx={{ width: 56, height: 56, borderRadius: '6px', marginRight: '8px' }}
+          variant='square'
+        />
         <Typography variant="h3">CCP's Terms Dictionary</Typography>
       </Box>
       <Grid container direction='row' alignItems='center' marginBottom={'45px'} marginTop={'50px'}>
