@@ -1,6 +1,7 @@
 {
   "name": "ccp-lang-dict",
   "version": "0.1.0",
+  "homepage": "https://thomasfreedom119.github.io/ccp-lang-dict",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -28,6 +29,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
@@ -50,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
