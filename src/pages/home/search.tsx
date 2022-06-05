@@ -42,8 +42,8 @@ export const Search = () => {
                     searchResult.dipResults.map((dr, i: number) => {
                       return (
                         <Grid item margin={'15px'} key={i}>
-                          <Typography fontWeight={800}>CCP: {dr.officialLang}</Typography>
-                          <Typography>Means: {dr.normalLang}</Typography>
+                          {dr.officialLangElem}
+                          {dr.normalLangElem}
                           {
                             dr.detail && <Typography fontWeight={300}>{dr.detail}</Typography>
                           }
@@ -66,8 +66,8 @@ export const Search = () => {
                     searchResult.milResults.map((mr, i: number) => {
                       return (
                         <Grid item margin={'15px'} key={i}>
-                          <Typography fontWeight={800}>CCP: {mr.officialLang}</Typography>
-                          <Typography>Means: {mr.normalLang}</Typography>
+                          {mr.officialLangElem}
+                          {mr.normalLangElem}
                           {
                             mr.detail && <Typography fontWeight={300}>{mr.detail}</Typography>
                           }

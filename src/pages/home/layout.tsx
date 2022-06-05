@@ -10,7 +10,7 @@ export const Home = () => {
 
 export const Layout = () => {
   return (
-    <Container maxWidth='md'>
+    <Container maxWidth='lg'>
       <Grid container spacing={2} direction='column' alignItems='center' padding={'15px'}>
         <Outlet />
       </Grid>
