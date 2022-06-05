@@ -48,7 +48,7 @@ export const useSearchLang = (inputTerm?: string) => {
   useEffect(() => {
     setLoading(true)
     if (inputTerm) {
-      axios.get('/cedict_ts.u8').then((res: any) => {
+      axios.get(`${process.env.PUBLIC_URL}/cedict_ts.u8`).then((res: any) => {
         const tokenize = tokenizer.load(res.data)
         const tokenizedWords = tokenize(inputTerm)
 

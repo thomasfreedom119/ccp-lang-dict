@@ -29,11 +29,11 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "PUBLIC_URL='/ccp-lang-dict' react-app-rewired build",
     "deploy": "gh-pages -d build",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "start": "PUBLIC_URL='/' react-app-rewired start",
+    "build": "PUBLIC_URL='/' react-app-rewired build",
+    "test": "PUBLIC_URL='/' react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

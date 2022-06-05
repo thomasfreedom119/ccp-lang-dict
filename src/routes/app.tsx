@@ -8,7 +8,7 @@ export const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path='/' element={<Layout />}>
+      <Route path={process.env.PUBLIC_URL} element={<Layout />}>
         <Route index element={<Search />} />
       </Route>
     </Routes>
