@@ -16,23 +16,29 @@ export const parseWithHighlight = (source: string, re: RegExp, prefix?: React.Re
   })
   const fWeight = isBold ? 700 : 400
   return (
-    <Box display={'flex'} alignItems='center' flexWrap={'wrap'} justifyContent='flex-start'>
+    <Box display={'inline-flex'} alignItems='center' flexWrap={'wrap'} justifyContent='flex-start'
+      sx={{
+        '& p mark': {
+          color: '#ff6d00',
+          backgroundColor: 'white',
+        }
+      }}
+    >
       {prefix}
       {
-        tempOfficialLang.split('<').map((subStr: string) => {
-          if (subStr.indexOf('>') !== -1) {
-            const ss = subStr.split('>')
-            return (
-              <>
-                <Typography color='orange' fontWeight={fWeight}>{ss[0]}</Typography>
-                <Typography fontWeight={fWeight}>{ss[1]}</Typography>
-              </>
-            )
+        <Typography fontWeight={fWeight}>
+          {
+            tempOfficialLang.split('<').map((subStr: string) => {
+              const ss = subStr.split('>')
+
+              return (
+                subStr.indexOf('>') === -1 ? ss[0] :
+                  <><mark>{ss[0]}</mark>{ss[1]}</>
+              )
+            })
           }
-          return (
-            <Typography fontWeight={fWeight}>{subStr}</Typography>
-          )
-        })
+        </Typography>
+
       }
     </Box>
   )
@@ -62,7 +68,7 @@ export const useSearchLang = (inputTerm?: string) => {
         }).map((di: LangItemType) => {
           return {
             ...di,
-            officialLangElem: parseWithHighlight(di.officialLang, re, <Typography marginRight={'8px'}>{`CCP: `}</Typography>, true),
+            officialLangElem: parseWithHighlight(di.officialLang, re, null, true),
             normalLangElem: parseWithHighlight(di.normalLang, re)
           }
         })
@@ -72,7 +78,7 @@ export const useSearchLang = (inputTerm?: string) => {
         }).map((mi: LangItemType) => {
           return {
             ...mi,
-            officialLangElem: parseWithHighlight(mi.officialLang, re, <Typography marginRight={'8px'}>{`CCP: `}</Typography>, true),
+            officialLangElem: parseWithHighlight(mi.officialLang, re, null, true),
             normalLangElem: parseWithHighlight(mi.normalLang, re)
           }
         })

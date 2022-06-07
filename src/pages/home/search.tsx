@@ -55,11 +55,13 @@ export const Search = () => {
                     searchResult.dipResults.map((dr, i: number) => {
                       return (
                         <Grid item margin={'15px'} key={i}>
-                          {dr.officialLangElem}
-                          {dr.normalLangElem}
-                          {
-                            dr.detail && <Typography fontWeight={300}>{dr.detail}</Typography>
-                          }
+                          <Box display='flex' flexDirection='column'>
+                            {dr.officialLangElem}
+                            {dr.normalLangElem}
+                            {
+                              dr.detail && <Typography fontWeight={300}>{dr.detail}</Typography>
+                            }
+                          </Box>
                         </Grid>
                       )
                     }) :
@@ -79,11 +81,13 @@ export const Search = () => {
                     searchResult.milResults.map((mr, i: number) => {
                       return (
                         <Grid item margin={'15px'} key={i}>
-                          {mr.officialLangElem}
-                          {mr.normalLangElem}
-                          {
-                            mr.detail && <Typography fontWeight={300}>{mr.detail}</Typography>
-                          }
+                          <Box display='flex' flexDirection='column'>
+                            {mr.officialLangElem}
+                            {mr.normalLangElem}
+                            {
+                              mr.detail && <Typography fontWeight={300}>{mr.detail}</Typography>
+                            }
+                          </Box>
                         </Grid>
                       )
                     }) :
