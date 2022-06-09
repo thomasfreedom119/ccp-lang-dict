@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/ccp-lang-dict/static/css/main.073c9b0a.css",
-    "main.js": "/ccp-lang-dict/static/js/main.94c22c1a.js",
+    "main.js": "/ccp-lang-dict/static/js/main.607dd5e9.js",
     "static/js/787.cb927bc3.chunk.js": "/ccp-lang-dict/static/js/787.cb927bc3.chunk.js",
     "index.html": "/ccp-lang-dict/index.html",
     "main.073c9b0a.css.map": "/ccp-lang-dict/static/css/main.073c9b0a.css.map",
-    "main.94c22c1a.js.map": "/ccp-lang-dict/static/js/main.94c22c1a.js.map",
+    "main.607dd5e9.js.map": "/ccp-lang-dict/static/js/main.607dd5e9.js.map",
     "787.cb927bc3.chunk.js.map": "/ccp-lang-dict/static/js/787.cb927bc3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.073c9b0a.css",
-    "static/js/main.94c22c1a.js"
+    "static/js/main.607dd5e9.js"
   ]
 }
