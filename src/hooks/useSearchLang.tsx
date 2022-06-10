@@ -8,6 +8,7 @@ import { milLangItems } from '../data/military_lang'
 export type SearchResultType = LangItemType & {
   officialLangElem: React.ReactNode
   normalLangElem: React.ReactNode
+  score: number
 }
 
 export const parseWithHighlight = (source: string, re: RegExp, prefix?: React.ReactNode, isBold?: boolean) => {
@@ -44,6 +45,27 @@ export const parseWithHighlight = (source: string, re: RegExp, prefix?: React.Re
   )
 }
 
+export const calculateScore = (langItem: LangItemType, regFull: RegExp, regSub: RegExp) => {
+  var score = 0
+  const officialMatchFull = langItem.officialLang.match(regFull)
+  if (officialMatchFull) {
+    score += 100 * officialMatchFull.length
+  }
+  const officialMatchSub = langItem.officialLang.match(regSub)
+  if (officialMatchSub) {
+    score += 10 * officialMatchSub.length
+  }
+  const normalMatchFull = langItem.normalLang.match(regFull)
+  if (normalMatchFull) {
+    score += 10 * normalMatchFull.length
+  }
+  const normalMatchSub = langItem.normalLang.match(regSub)
+  if (normalMatchSub) {
+    score += 1 * normalMatchSub.length
+  }
+  return score
+}
+
 export const useSearchLang = (inputTerm?: string) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [searchResult, setSearchResult] = useState<{
@@ -62,6 +84,8 @@ export const useSearchLang = (inputTerm?: string) => {
           return token.text
         }).filter((t: string) => t.length > 1)
         const re = new RegExp([inputTerm, ...tks].join('|'), 'g')
+        const fullReg = new RegExp(inputTerm)
+        const subReg = new RegExp(tks.join('|'), 'g')
 
         const dipFiltered: SearchResultType[] = dipLangItems.filter((dItem: LangItemType) => {
           return dItem.officialLang.search(re) !== -1 || dItem.normalLang.search(re) !== -1
@@ -69,8 +93,11 @@ export const useSearchLang = (inputTerm?: string) => {
           return {
             ...di,
             officialLangElem: parseWithHighlight(di.officialLang, re, null, true),
-            normalLangElem: parseWithHighlight(di.normalLang, re)
+            normalLangElem: parseWithHighlight(di.normalLang, re),
+            score: calculateScore(di, fullReg, subReg)
           }
+        }).sort((dia: SearchResultType, dib: SearchResultType) => {
+          return dib.score - dia.score
         })
 
         const milFiltered: SearchResultType[] = milLangItems.filter((mItem: LangItemType) => {
@@ -79,8 +106,11 @@ export const useSearchLang = (inputTerm?: string) => {
           return {
             ...mi,
             officialLangElem: parseWithHighlight(mi.officialLang, re, null, true),
-            normalLangElem: parseWithHighlight(mi.normalLang, re)
+            normalLangElem: parseWithHighlight(mi.normalLang, re),
+            score: calculateScore(mi, fullReg, subReg)
           }
+        }).sort((mia: SearchResultType, mib: SearchResultType) => {
+          return mib.score - mia.score
         })
 
         setSearchResult({
