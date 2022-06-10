@@ -1,5 +1,4 @@
 import { Box, Typography } from '@mui/material'
-import axios from 'axios'
 import tokenizer from 'chinese-tokenizer'
 import React, { useEffect, useState } from 'react'
 import { dipLangItems, LangItemType } from '../data/diplomatic_lang'
@@ -66,7 +65,7 @@ export const calculateScore = (langItem: LangItemType, regFull: RegExp, regSub: 
   return score
 }
 
-export const useSearchLang = (inputTerm?: string) => {
+export const useSearchLang = (ceDictData: any, inputTerm?: string) => {
   const [loading, setLoading] = useState<boolean>(false)
   const [searchResult, setSearchResult] = useState<{
     dipResults: SearchResultType[],
@@ -75,9 +74,9 @@ export const useSearchLang = (inputTerm?: string) => {
 
   useEffect(() => {
     setLoading(true)
-    if (inputTerm) {
-      axios.get(`${process.env.PUBLIC_URL}/cedict_ts.u8`).then((res: any) => {
-        const tokenize = tokenizer.load(res.data)
+    if (inputTerm && ceDictData) {
+      setTimeout(() => {
+        const tokenize = tokenizer.load(ceDictData)
         const tokenizedWords = tokenize(inputTerm)
 
         const tks = tokenizedWords.map((token: any) => {
@@ -118,7 +117,7 @@ export const useSearchLang = (inputTerm?: string) => {
           milResults: milFiltered
         })
         setLoading(false)
-      })
+      }, 1000)
     } else {
       setSearchResult({
         dipResults: [],
@@ -126,7 +125,7 @@ export const useSearchLang = (inputTerm?: string) => {
       })
       setLoading(false)
     }
-  }, [inputTerm])
+  }, [inputTerm, ceDictData])
 
   return { loading, searchResult }
 }

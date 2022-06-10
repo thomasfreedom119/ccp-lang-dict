@@ -1,11 +1,13 @@
 import { Avatar, Box, Button, CircularProgress, Grid, Input, Typography } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useSearchLang } from "../../hooks/useSearchLang";
 
 export const Search = () => {
   const [searchText, setSearchText] = useState<string>()
   const [inputText, setInputText] = useState<string>('')
-  const { loading, searchResult } = useSearchLang(searchText)
+  const [ceDictData, setCeDictData] = useState()
+  const { loading, searchResult } = useSearchLang(ceDictData, searchText)
 
   const onUserInput = (e: any) => {
     setInputText(e.target.value)
@@ -16,6 +18,12 @@ export const Search = () => {
       setSearchText(inputText)
     }
   }
+
+  useEffect(() => {
+    axios.get(`${process.env.PUBLIC_URL}/cedict_ts.u8`).then((res: any) => {
+      setCeDictData(res.data)
+    })
+  }, [])
 
   return (
     <>
